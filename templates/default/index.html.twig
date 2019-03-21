@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div style="display: flex; justify-content: space-around; align-items: center; padding: 200px 50px;">
+    <div>
+        <div class="row">
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+            <div class="col-sm" style="margin: 10px; padding: 30px;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm" style="margin: 10px; padding: 30px;">
+            </div>
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+            <div class="col-sm" style="background-color: black; margin: 10px; padding: 30px;">
+                <a href="{{ path('default') }}" style="color: white; display: flex; justify-content: center;">Home</a>
+            </div>
+        </div>
+    </div>
+    <div style="width: 500px; height: 291px; background-color: black; display:flex; justify-content: center; align-items: center;">
+            <p style="color: white;">Highlighted Items</p>
+    </div>
+</div>
+{% endblock %}
