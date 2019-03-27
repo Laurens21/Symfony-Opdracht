@@ -33,16 +33,37 @@
                         <a class="nav-link" href="{{ path('truck_index') }}">Trucks</a>
                 </li>
             </ul>
+            {% elseif is_granted('ROLE_CHAUFFEUR') %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('default') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ path('logboek_index') }}">Logboek</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ path('truck_index') }}">Trucks</a>
+                </li>
+            </ul>
+            {% elseif is_granted('ROLE_USER') %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('default') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logboek_index') }}">Logboek</a>
+                </li>
+            </ul>
             {% else %}
             <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('default') }}">Home</a>
-                    </li>
-                </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('default') }}">Home</a>
+                </li>
+            </ul>
             {% endif %}
             <div class="navbar navbar-inverse" role="navigation">
                     <div class="blockMain">
-                  
+
                           {% if app.user %}
                               {% set mainMenu = [
                                   {'path': 'fos_user_security_logout','name': 'Logout'}

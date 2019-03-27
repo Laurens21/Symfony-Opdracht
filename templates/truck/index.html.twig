@@ -12,7 +12,9 @@
                 <th>Kenteken</th>
                 <th>Merk</th>
                 <th>Bouwjaar</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -22,10 +24,12 @@
                 <td>{{ truck.kenteken }}</td>
                 <td>{{ truck.merk }}</td>
                 <td>{{ truck.bouwjaar ? truck.bouwjaar|date('Y-m-d') : '' }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
                     <a href="{{ path('truck_show', {'id': truck.id}) }}">show</a>
                     <a href="{{ path('truck_edit', {'id': truck.id}) }}">edit</a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -34,6 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('truck_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('truck_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

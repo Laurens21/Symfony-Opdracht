@@ -28,14 +28,22 @@ class LogboekController extends AbstractController
      */
     public function index(LogboekRepository $logboekRepository): Response
     {
-
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
+        $user = $this->getUser()->getId();
+        if ($this->security->isGranted('ROLE_CHAUFFEUR')) {
+            return $this->render('logboek/index.html.twig', [
+                'logboeks' => $logboekRepository->findBy(['userId' => $user]),
+            ]);
+        } elseif($this->security->isGranted('ROLE_ADMIN')) {
+            return $this->render('logboek/index.html.twig', [
+                'logboeks' => $logboekRepository->findAll(),
+            ]);
+        } elseif($this->security->isGranted('ROLE_USER')) {
+            return $this->render('logboek/index.html.twig', [
+                'logboeks' => $logboekRepository->findBy(['userId' => $user]),
+            ]);
+        } else {
             return $this->redirectToRoute('default');
         }
-
-        return $this->render('logboek/index.html.twig', [
-            'logboeks' => $logboekRepository->findAll(),
-        ]);
     }
 
     /**

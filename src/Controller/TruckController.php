@@ -30,13 +30,17 @@ class TruckController extends AbstractController
     public function index(TruckRepository $truckRepository): Response
     {
 
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
+        if ($this->security->isGranted('ROLE_CHAUFFEUR')) {
+            return $this->render('truck/index.html.twig', [
+                'trucks' => $truckRepository->findAll(),
+            ]);
+        } elseif($this->security->isGranted('ROLE_ADMIN')) {
+            return $this->render('truck/index.html.twig', [
+                'trucks' => $truckRepository->findAll(),
+            ]);
+        } else {
             return $this->redirectToRoute('default');
         }
-
-        return $this->render('truck/index.html.twig', [
-            'trucks' => $truckRepository->findAll(),
-        ]);
     }
 
     /**
