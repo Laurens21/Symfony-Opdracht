@@ -52,9 +52,7 @@ class LogboekController extends AbstractController
     public function new(Request $request): Response
     {
 
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('logboek_index');
-        }
+        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_CHAUFFEUR')) {
 
         $logboek = new Logboek();
         $form = $this->createForm(LogboekType::class, $logboek);
@@ -72,6 +70,9 @@ class LogboekController extends AbstractController
             'logboek' => $logboek,
             'form' => $form->createView(),
         ]);
+        } else {
+            return $this->redirectToRoute('logboek_index');
+        }
     }
 
     /**
@@ -79,13 +80,14 @@ class LogboekController extends AbstractController
      */
     public function show(Logboek $logboek): Response
     {
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('default');
-        }
+        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_CHAUFFEUR')) {
 
         return $this->render('logboek/show.html.twig', [
             'logboek' => $logboek,
         ]);
+        } else {
+            return $this->redirectToRoute('default');
+        }
     }
 
     /**
@@ -94,9 +96,7 @@ class LogboekController extends AbstractController
     public function edit(Request $request, Logboek $logboek): Response
     {
 
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('logboek_index');
-        }
+        if ($this->security->isGranted('ROLE_ADMIN')) {
 
         $form = $this->createForm(LogboekType::class, $logboek);
         $form->handleRequest($request);
@@ -113,6 +113,9 @@ class LogboekController extends AbstractController
             'logboek' => $logboek,
             'form' => $form->createView(),
         ]);
+        } else {
+            return $this->redirectToRoute('default');
+        }
     }
 
     /**

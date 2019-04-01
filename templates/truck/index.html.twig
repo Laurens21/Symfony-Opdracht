@@ -13,7 +13,7 @@
                 <th>Merk</th>
                 <th>Bouwjaar</th>
                 {% if is_granted('ROLE_ADMIN') %}
-                <th>actions</th>
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_CHAUFFEUR') %} <th>actions</th> {% endif %}
                 {% endif %}
             </tr>
         </thead>
@@ -26,8 +26,8 @@
                 <td>{{ truck.bouwjaar ? truck.bouwjaar|date('Y-m-d') : '' }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
                 <td>
-                    <a href="{{ path('truck_show', {'id': truck.id}) }}">show</a>
-                    <a href="{{ path('truck_edit', {'id': truck.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_CHAUFFEUR') %} <a class="btn btn-dark" href="{{ path('truck_show', {'id': truck.id}) }}">show</a> {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %} <a class="btn btn-success" href="{{ path('truck_edit', {'id': truck.id}) }}">edit</a> {% endif %}
                 </td>
                 {% endif %}
             </tr>
@@ -39,6 +39,6 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('truck_new') }}">Create new</a>
+        <a style="margin: 10px" class="btn btn-success" href="{{ path('truck_new') }}">Create new</a>
     {% endif %}
 {% endblock %}
